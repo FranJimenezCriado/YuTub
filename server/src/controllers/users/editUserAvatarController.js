@@ -3,15 +3,13 @@ import updateUserAvatarModel from '../../models/users/updateUserAvatarModel.js';
 
 import { deletePhoto, savePhoto } from '../../services/photoService.js';
 
-import { missingFieldsError } from '../../services/errorService.js';
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+import editUserAvatarSchema from '../../schemas/users/editUserAvatarSchema.js';
 
 const editUserAvatarController = async (req, res, next) => {
     try {
-        const avatar = req.files?.avatar;
-
-        if (!avatar) {
-            missingFieldsError();
-        }
+        await validateSchemaUtil(editUserAvatarSchema, req.files || {});
 
         const user = await selectUserByIdModel(req.user.id);
 
@@ -19,7 +17,7 @@ const editUserAvatarController = async (req, res, next) => {
             await deletePhoto(user.avatar);
         }
 
-        const avatarName = await savePhoto(avatar, 150);
+        const avatarName = await savePhoto(req.files.avatar, 150);
 
         await updateUserAvatarModel(avatarName, req.user.id);
 
