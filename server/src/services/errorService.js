@@ -78,11 +78,27 @@ export const videoLimitReachedError = () => {
     };
 };
 
+export const recoveryCodeError = () => {
+    throw {
+        httpStatus: 401, // Unauthorized
+        code: 'INVALID_RECOVERY_CODE',
+        message: 'Recovery code incorrect',
+    };
+};
+
 export const saveFileError = () => {
     throw {
         httpStatus: 500, // Internal Server Error
         code: 'FILE_SAVE_FAILED',
         message: 'Error saving the file',
+    };
+};
+
+export const sendEmailError = () => {
+    throw {
+        httpStatus: 500, // Internal server error
+        code: 'SEND_EMAIL_FAILED',
+        message: 'Error al enviar email',
     };
 };
 

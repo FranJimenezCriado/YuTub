@@ -1,20 +1,25 @@
+import randomstring from 'randomstring';
+
 import insertUserModel from '../../models/users/insertUserModel.js';
 
-import { missingFieldsError } from '../../services/errorService.js';
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+import newUserSchema from '../../schemas/users/newUserSchema.js';
 
 const newUserController = async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
 
-        if (!username || !email || !password) {
-            missingFieldsError();
-        }
+        await validateSchemaUtil(newUserSchema, req.body);
 
-        await insertUserModel(username, email, password);
+        const registrationCode = randomstring.generate(30);
+
+        await insertUserModel(username, email, password, registrationCode);
 
         res.status(201).send({
             status: 'ok',
-            message: 'User created',
+            message:
+                'User created. Please, verify your user through email verification',
         });
     } catch (err) {
         next(err);

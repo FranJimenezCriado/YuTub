@@ -11,7 +11,7 @@ const selectUserByIdModel = async (userId) => {
     );
 
     if (users.length < 1) {
-        notFoundError('usuario');
+        notFoundError('user');
     }
 
     return users[0];

@@ -17,7 +17,10 @@ const createTables = async () => {
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL,
                 avatar VARCHAR(100),
+                active BOOLEAN DEFAULT false,
                 role ENUM('admin', 'normal') DEFAULT 'normal',
+                registrationCode CHAR(30),
+                recoverPassCode CHAR(10),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )	
@@ -25,9 +28,10 @@ const createTables = async () => {
 
         await pool.query(`
             CREATE TABLE IF NOT EXISTS videos (
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id VARCHAR(100) PRIMARY KEY,
                 title VARCHAR(50) NOT NULL,
                 description TEXT NOT NULL,
+                file VARCHAR(100) NOT NULL,
                 userId INT UNSIGNED NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
@@ -41,7 +45,7 @@ const createTables = async () => {
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 value TINYINT UNSIGNED NOT NULL,
                 userId INT UNSIGNED NOT NULL,
-                videoId INT UNSIGNED NOT NULL,
+                videoId VARCHAR(100) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
                 FOREIGN KEY (videoId) REFERENCES videos(id)
