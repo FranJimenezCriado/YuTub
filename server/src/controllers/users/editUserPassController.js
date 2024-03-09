@@ -4,11 +4,17 @@ import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
 import editUserPassSchema from '../../schemas/users/editUserPassSchema.js';
 
+import { samePasswordError } from '../../services/errorService.js';
+
 const editUserPassController = async (req, res, next) => {
     try {
-        const { email, recoverPassCode, newPass } = req.body;
+        const { email, password, newPass, recoverPassCode } = req.body;
 
         await validateSchemaUtil(editUserPassSchema, req.body);
+
+        if (password === newPass) {
+            samePasswordError();
+        }
 
         await updateUserPassModel(email, recoverPassCode, newPass);
 

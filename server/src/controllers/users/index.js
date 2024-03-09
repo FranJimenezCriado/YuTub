@@ -6,6 +6,8 @@ import getOwnUserController from './getOwnUserController.js';
 import getPublicUserController from './getPublicUserController.js';
 import sendRecoverPassController from './sendRecoverPassController.js';
 import validateUserController from './validateUserController.js';
+import editUserEmailController from './editUserEmailController.js';
+import editUserNameController from './editUserNameController.js';
 
 export {
     newUserController,
@@ -16,4 +18,6 @@ export {
     editUserPassController,
     sendRecoverPassController,
     validateUserController,
+    editUserEmailController,
+    editUserNameController,
 };

@@ -25,7 +25,7 @@ const selectVideoByIdModel = async (videoId) => {
     );
 
     if (videos.length < 1 || !videos[0].id) {
-        notFoundError('entrada');
+        notFoundError('video');
     }
 
     videos[0].votes = Number(videos[0].votes);
