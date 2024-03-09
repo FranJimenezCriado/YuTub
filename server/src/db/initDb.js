@@ -52,14 +52,12 @@ const createTables = async () => {
             )
         `);
 
-        console.log('¡Tablas creadas!');
+        console.log('Tables created!');
 
-        // Cerramos el proceso con código 0 indicando que todo ha ido bien.
         process.exit(0);
     } catch (err) {
         console.error(err);
 
-        // Cerramos el proceso con código 1 indicando que hubo un error.
         process.exit(1);
     }
 };

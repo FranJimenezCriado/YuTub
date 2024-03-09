@@ -3,9 +3,13 @@ import jwt from 'jsonwebtoken';
 
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
+
+import loginUserSchema from '../../schemas/users/loginUserSchema.js';
+
 import {
-    missingFieldsError,
     invalidCredentialsError,
+    pendingActivationError,
 } from '../../services/errorService.js';
 
 import { SECRET } from '../../../env.js';
@@ -14,9 +18,7 @@ const loginUserController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            missingFieldsError();
-        }
+        await validateSchemaUtil(loginUserSchema, req.body);
 
         const user = await selectUserByEmailModel(email);
 
@@ -28,6 +30,10 @@ const loginUserController = async (req, res, next) => {
 
         if (!user || !validPass) {
             invalidCredentialsError();
+        }
+
+        if (!user.active) {
+            pendingActivationError();
         }
 
         const tokenInfo = {

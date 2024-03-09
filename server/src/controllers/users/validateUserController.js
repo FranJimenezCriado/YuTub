@@ -4,8 +4,6 @@ const validateUserController = async (req, res, next) => {
     try {
         const { registrationCode } = req.params;
 
-        console.log(registrationCode);
-
         await updateUserRegCodeModel(registrationCode);
 
         res.send({

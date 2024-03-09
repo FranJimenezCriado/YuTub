@@ -22,6 +22,14 @@ export const emailAlreadyRegisteredError = () => {
     };
 };
 
+export const usernameAlreadyExistsError = () => {
+    throw {
+        httpStatus: 409, // Conflict
+        code: 'USERNAME_ALREADY_EXISTS',
+        message: 'This username is being used, try another one',
+    };
+};
+
 export const invalidCredentialsError = () => {
     throw {
         httpStatus: 401, // Unauthorized
@@ -59,6 +67,15 @@ export const notFoundError = (resource) => {
         httpStatus: 404, // Not Found
         code: 'RESOURCE_NOT_FOUND',
         message: `The required resource '${resource}' doesn't exist`,
+    };
+};
+
+export const pendingActivationError = () => {
+    throw {
+        httpStatus: 403, // Forbidden
+        code: 'PENDING_ACTIVATION',
+        message:
+            'User pending to be activated. Please, verify your account before login',
     };
 };
 
@@ -107,6 +124,14 @@ export const userAlreadyRegisteredError = () => {
         httpStatus: 409, // Conflict
         code: 'USER_ALREADY_REGISTERED',
         message: 'Username already registered',
+    };
+};
+
+export const samePasswordError = () => {
+    throw {
+        httpStatus: 400, // Bad Request
+        code: 'SAME_PASSWORD',
+        message: 'Same password than before',
     };
 };
 
