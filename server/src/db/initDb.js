@@ -39,9 +39,8 @@ const createTables = async () => {
             )
         `);
 
-        // Tabla de votos.
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS videoVotes (
+            CREATE TABLE IF NOT EXISTS videoLikes (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 value TINYINT UNSIGNED NOT NULL,
                 userId INT UNSIGNED NOT NULL,

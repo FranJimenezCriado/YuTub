@@ -6,17 +6,20 @@ import insertVideoModel from '../../models/videos/insertVideoModel.js';
 
 import { UPLOADS_DIR } from '../../../env.js';
 
-import { missingFieldsError } from '../../services/errorService.js';
+import newVideoSchema from '../../schemas/videos/newVideoSchema.js';
+
+import validateSchemaUtil from '../../utils/validateSchemaUtil.js';
 
 const newVideoController = async (req, res, next) => {
     try {
+        await validateSchemaUtil(
+            newVideoSchema,
+            Object.assign(req.body, req.files),
+        );
+
         const { title, description } = req.body;
 
         const file = req.files.file;
-
-        if (!title || !description || !file) {
-            missingFieldsError();
-        }
 
         let uploadsDir = path.join(process.cwd(), UPLOADS_DIR);
 
@@ -40,7 +43,9 @@ const newVideoController = async (req, res, next) => {
 
         const video = [];
 
-        file.name = `${crypto.randomUUID()}.mp4`;
+        const fileExt = path.extname(file.name);
+
+        file.name = `${crypto.randomUUID()}${fileExt}`;
 
         const id = crypto.randomUUID();
 

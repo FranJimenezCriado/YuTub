@@ -4,7 +4,6 @@ import insertVoteModel from '../../models/videos/insertVoteModel.js';
 import {
     cannotVoteOwnVideoError,
     missingFieldsError,
-    notValidVoteError,
 } from '../../services/errorService.js';
 
 const voteVideoController = async (req, res, next) => {
@@ -21,12 +20,6 @@ const voteVideoController = async (req, res, next) => {
 
         if (!value) {
             missingFieldsError();
-        }
-
-        const validVotes = [1, 2, 3, 4, 5];
-
-        if (!validVotes.includes(value)) {
-            notValidVoteError();
         }
 
         const votesAvg = await insertVoteModel(value, videoId, req.user.id);
