@@ -5,7 +5,7 @@ const joiErrorMessages = {
     'number.base': 'Value of "{#key}" must be a number',
     'number.max': `File shouldn't be more than 5 MB`,
     'object.base': 'Value of "{#key}" must be an object',
-    'any.only': 'Only jpeg or png images allowed',
+    'any.only': 'Formato no válido. Solo se admiten las extensiones {#valids}',
     'string.email': 'Must give a valid email for "{#key}"',
     'string.pattern.base':
         'The password must has one capital letter, one lowercase letter, one number and a simbol for "{#key}"',
