@@ -1,32 +1,36 @@
+import bcrypt from 'bcrypt';
+
 import getPool from '../../db/getPool.js';
 
-import selectUserByEmailModel from './selectUserByEmailModel.js';
-
 import {
-    notFoundError,
     emailAlreadyRegisteredError,
+    invalidCredentialsError,
 } from '../../services/errorService.js';
 
-const updateUserPassModel = async (email, newEmail) => {
+const updateUserPassModel = async (newEmail, userId, actualPass) => {
     const pool = await getPool();
 
-    const user = await selectUserByEmailModel(email);
+    let validPass;
 
-    if (!user) {
-        notFoundError('user');
-    }
+    const [user] = await pool.query('SELECT * FROM users');
 
-    const [users] = await pool.query('SELECT email FROM users');
-
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === newEmail) {
+    for (let i = 0; i < user.length; i++) {
+        if (user[i].email === newEmail) {
             emailAlreadyRegisteredError();
+        }
+
+        if (userId === user[i].id) {
+            validPass = await bcrypt.compare(actualPass, user[i].password);
+        }
+
+        if (!validPass) {
+            invalidCredentialsError();
         }
     }
 
-    await pool.query(`UPDATE users SET email = ? WHERE email = ?`, [
+    await pool.query(`UPDATE users SET email = ? WHERE id = ?`, [
         newEmail,
-        email,
+        userId,
     ]);
 };
 

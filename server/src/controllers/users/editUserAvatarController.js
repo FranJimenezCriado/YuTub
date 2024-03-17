@@ -23,6 +23,7 @@ const editUserAvatarController = async (req, res, next) => {
 
         res.send({
             status: 'ok',
+            message: 'Avatar updated',
             data: {
                 avatar: {
                     name: avatarName,

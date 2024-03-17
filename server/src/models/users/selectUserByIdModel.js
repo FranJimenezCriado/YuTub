@@ -1,7 +1,5 @@
 import getPool from '../../db/getPool.js';
 
-import { notFoundError } from '../../services/errorService.js';
-
 const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
 
@@ -9,10 +7,6 @@ const selectUserByIdModel = async (userId) => {
         `SELECT id, username, avatar, email FROM users WHERE id = ?`,
         [userId],
     );
-
-    if (users.length < 1) {
-        notFoundError('user');
-    }
 
     return users[0];
 };
