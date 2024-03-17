@@ -9,6 +9,8 @@ import {
     emailAlreadyRegisteredError,
 } from '../../services/errorService.js';
 
+import { CLIENT_URL } from '../../../env.js';
+
 const insertUserModel = async (username, email, password, registrationCode) => {
     const pool = await getPool();
 
@@ -26,14 +28,14 @@ const insertUserModel = async (username, email, password, registrationCode) => {
         emailAlreadyRegisteredError();
     }
 
-    const emailSubject = 'Activa tu usuario en Diario de Viajes :)';
+    const emailSubject = 'Activate your user at Yutub';
 
     const emailBody = `
             ¡Welcome ${username}!
     
             Thanks for registering in the website. To activate your account, click on the next link:
     
-            <a href="http://localhost:8000/users/validate/${registrationCode}">Activate my account</a>
+            <a href="${CLIENT_URL}/users/validate/${registrationCode}">Activate my account</a>
         `;
 
     await sendMailUtil(email, emailSubject, emailBody);

@@ -41,8 +41,6 @@ const newVideoController = async (req, res, next) => {
             });
         }
 
-        const video = [];
-
         const fileExt = path.extname(file.name);
 
         file.name = `${crypto.randomUUID()}${fileExt}`;
@@ -59,11 +57,6 @@ const newVideoController = async (req, res, next) => {
             req.user.id,
         );
 
-        video.push({
-            id: videoId,
-            name: videoName,
-        });
-
         uploadsDir = path.join(process.cwd(), UPLOADS_DIR, 'videos', videoName);
 
         file.mv(uploadsDir, function () {
@@ -74,7 +67,7 @@ const newVideoController = async (req, res, next) => {
                         id: videoId,
                         title,
                         description,
-                        video,
+                        videoName,
                         userId: req.user.id,
                         createdAt: new Date(),
                     },

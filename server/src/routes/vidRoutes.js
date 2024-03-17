@@ -1,6 +1,13 @@
 import express from 'express';
 
 import {
+    authUserController,
+    userExistsController,
+    authUserOptionalController,
+    videoExistsController,
+} from '../middlewares/index.js';
+
+import {
     newVideoController,
     listVideosController,
     getVideoController,
@@ -8,17 +15,31 @@ import {
     voteVideoController,
 } from '../controllers/videos/index.js';
 
-import { authUserController } from '../middlewares/index.js';
-
 const router = express.Router();
 
-router.post('/videos', authUserController, newVideoController);
+router.post(
+    '/videos',
+    authUserController,
+    userExistsController,
+    newVideoController,
+);
 
-router.get('/videos', listVideosController);
+router.get('/videos', authUserOptionalController, listVideosController);
 
-router.get('/videos/:videoId', getVideoController);
+router.get(
+    '/videos/:videoId',
+    authUserOptionalController,
+    videoExistsController,
+    getVideoController,
+);
 
-router.post('/videos/:videoId/votes', authUserController, voteVideoController);
+router.post(
+    '/videos/:videoId/votes',
+    authUserController,
+    userExistsController,
+    videoExistsController,
+    voteVideoController,
+);
 
 router.delete('/videos/:videoId', authUserController, deleteVideoController);
 

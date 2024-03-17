@@ -35,9 +35,9 @@ router.get(
     getOwnUserController,
 );
 
-router.put('/users/username', editUserNameController);
+router.put('/users/username', authUserController, editUserNameController);
 
-router.put('/users/email', editUserEmailController);
+router.put('/users/email', authUserController, editUserEmailController);
 
 router.put(
     '/users/avatar',
