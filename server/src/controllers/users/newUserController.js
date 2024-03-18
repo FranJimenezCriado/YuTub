@@ -14,7 +14,9 @@ const newUserController = async (req, res, next) => {
 
         const registrationCode = randomstring.generate(30);
 
-        await insertUserModel(username, email, password, registrationCode);
+        const id = crypto.randomUUID();
+
+        await insertUserModel(id, username, email, password, registrationCode);
 
         res.status(201).send({
             status: 'ok',

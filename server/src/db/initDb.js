@@ -6,13 +6,13 @@ const createTables = async () => {
 
         console.log('Dropping tables...');
 
-        await pool.query('DROP TABLE IF EXISTS videoVotes, videos, users');
+        await pool.query('DROP TABLE IF EXISTS videolikes, videos, users');
 
         console.log('Creating tables...');
 
         await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id VARCHAR(100) PRIMARY KEY,
                 email VARCHAR(100) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL,
@@ -32,7 +32,7 @@ const createTables = async () => {
                 title VARCHAR(50) NOT NULL,
                 description TEXT NOT NULL,
                 file VARCHAR(100) NOT NULL,
-                userId INT UNSIGNED NOT NULL,
+                userId VARCHAR(100) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id)
@@ -40,10 +40,11 @@ const createTables = async () => {
         `);
 
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS videoLikes (
+            CREATE TABLE IF NOT EXISTS videolikes (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                value TINYINT UNSIGNED NOT NULL,
-                userId INT UNSIGNED NOT NULL,
+                likes INT UNSIGNED,
+                dislikes INT UNSIGNED,
+                userId VARCHAR(100) NOT NULL,
                 videoId VARCHAR(100) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (userId) REFERENCES users(id),
@@ -61,5 +62,4 @@ const createTables = async () => {
     }
 };
 
-// Llamamos a la función anterior.
 createTables();

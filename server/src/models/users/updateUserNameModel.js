@@ -1,20 +1,9 @@
 import getPool from '../../db/getPool.js';
 
-import selectUserByEmailModel from './selectUserByEmailModel.js';
+import { usernameAlreadyExistsError } from '../../services/errorService.js';
 
-import {
-    notFoundError,
-    usernameAlreadyExistsError,
-} from '../../services/errorService.js';
-
-const updateUserNameModel = async (newUsername, email) => {
+const updateUserNameModel = async (newUsername, userId) => {
     const pool = await getPool();
-
-    const user = await selectUserByEmailModel(email);
-
-    if (!user) {
-        notFoundError('user');
-    }
 
     const [users] = await pool.query('SELECT username FROM users');
 
@@ -26,7 +15,7 @@ const updateUserNameModel = async (newUsername, email) => {
 
     await pool.query(`UPDATE users SET username = ? WHERE id = ?`, [
         newUsername,
-        user.id,
+        userId,
     ]);
 };
 

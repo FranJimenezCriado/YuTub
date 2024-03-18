@@ -11,7 +11,13 @@ import {
 
 import { CLIENT_URL } from '../../../env.js';
 
-const insertUserModel = async (username, email, password, registrationCode) => {
+const insertUserModel = async (
+    id,
+    username,
+    email,
+    password,
+    registrationCode,
+) => {
     const pool = await getPool();
 
     let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
@@ -43,8 +49,8 @@ const insertUserModel = async (username, email, password, registrationCode) => {
     const hashedPass = await bcrypt.hash(password, 10);
 
     await pool.query(
-        `INSERT INTO users (username, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
-        [username, email, hashedPass, registrationCode],
+        `INSERT INTO users (id, username, email, password, registrationCode) VALUES (?, ?, ?, ?, ?)`,
+        [id, username, email, hashedPass, registrationCode],
     );
 };
 
