@@ -14,11 +14,12 @@ const selectVideoByIdModel = async (videoId) => {
                 v.file,
                 v.userId,
                 u.username,
-                AVG(IFNULL(vo.value, 0)) AS votes,
+                COUNT(likes) AS Likes,
+                COUNT(dislikes) AS Dislikes,
                 v.createdAt
             FROM videos v
             INNER JOIN users u ON u.id = v.userId
-            LEFT JOIN videoVotes vo ON vo.videoId = v.id
+            LEFT JOIN videolikes vo ON vo.videoId = v.id
             WHERE v.id = ?
         `,
         [videoId],
@@ -27,8 +28,6 @@ const selectVideoByIdModel = async (videoId) => {
     if (videos.length < 1 || !videos[0].id) {
         notFoundError('video');
     }
-
-    videos[0].votes = Number(videos[0].votes);
 
     return videos[0];
 };

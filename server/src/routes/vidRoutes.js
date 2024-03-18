@@ -5,6 +5,7 @@ import {
     userExistsController,
     authUserOptionalController,
     videoExistsController,
+    canEditController,
 } from '../middlewares/index.js';
 
 import {
@@ -13,6 +14,7 @@ import {
     getVideoController,
     deleteVideoController,
     voteVideoController,
+    editVideoController,
 } from '../controllers/videos/index.js';
 
 const router = express.Router();
@@ -22,6 +24,15 @@ router.post(
     authUserController,
     userExistsController,
     newVideoController,
+);
+
+router.post(
+    '/videos/:videoId/edit',
+    authUserController,
+    userExistsController,
+    videoExistsController,
+    canEditController,
+    editVideoController,
 );
 
 router.get('/videos', authUserOptionalController, listVideosController);

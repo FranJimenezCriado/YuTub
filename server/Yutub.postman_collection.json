@@ -111,7 +111,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": ""
 								}
 							]
 						}
@@ -242,7 +242,7 @@
 							"variable": [
 								{
 									"key": "registrationCode",
-									"value": "NdFLCHxwQrUUOcPyMX18DacInoqFC1"
+									"value": ""
 								}
 							]
 						}
@@ -253,10 +253,16 @@
 					"name": "Edit Email",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_1}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"\",\r\n    \"newEmail\": \"\"\r\n}",
+							"raw": "{\r\n    \"newEmail\": \"\",\r\n    \"actualPass\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,10 +288,16 @@
 					"name": "Edit Username",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_1}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newUsername\": \"\",\r\n    \"email\": \"\"\r\n}",
+							"raw": "{\r\n    \"newUsername\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,7 +394,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/videos/ef09eda5-9c3b-4d64-88f0-90c66bf9b01d",
+							"raw": "http://localhost:8000/videos/:videoId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -390,7 +402,13 @@
 							"port": "8000",
 							"path": [
 								"videos",
-								"ef09eda5-9c3b-4d64-88f0-90c66bf9b01d"
+								":videoId"
+							],
+							"variable": [
+								{
+									"key": "videoId",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -408,7 +426,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8000/videos/289931bc-9050-4fe0-914c-59e6d427225a",
+							"raw": "http://localhost:8000/videos/:videoId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -416,7 +434,13 @@
 							"port": "8000",
 							"path": [
 								"videos",
-								"289931bc-9050-4fe0-914c-59e6d427225a"
+								":videoId"
+							],
+							"variable": [
+								{
+									"key": "videoId",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -435,7 +459,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"value\": 3\r\n}",
+							"raw": "{\r\n    \"like\": true\r\n    //Send like as true or dislike as true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -443,7 +467,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/videos/ef09eda5-9c3b-4d64-88f0-90c66bf9b01d/votes",
+							"raw": "http://localhost:8000/videos/:videoId/votes",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -451,8 +475,56 @@
 							"port": "8000",
 							"path": [
 								"videos",
-								"ef09eda5-9c3b-4d64-88f0-90c66bf9b01d",
+								":videoId",
 								"votes"
+							],
+							"variable": [
+								{
+									"key": "videoId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Description",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_1}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/videos/:videoId/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"videos",
+								":videoId",
+								"edit"
+							],
+							"variable": [
+								{
+									"key": "videoId",
+									"value": ""
+								}
 							]
 						}
 					},

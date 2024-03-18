@@ -1,16 +1,14 @@
 import selectVideoByIdModel from '../../models/videos/selectVideoByIdModel.js';
-import insertVoteModel from '../../models/videos/insertVoteModel.js';
+import insertLikeModel from '../../models/videos/insertLikeModel.js';
+import insertDisLikeModel from '../../models/videos/insertDisLikeModel.js';
 
-import {
-    cannotVoteOwnVideoError,
-    missingFieldsError,
-} from '../../services/errorService.js';
+import { cannotVoteOwnVideoError } from '../../services/errorService.js';
 
 const voteVideoController = async (req, res, next) => {
     try {
         const { videoId } = req.params;
 
-        const { value } = req.body;
+        const { like, dislike } = req.body;
 
         const video = await selectVideoByIdModel(videoId);
 
@@ -18,17 +16,24 @@ const voteVideoController = async (req, res, next) => {
             cannotVoteOwnVideoError();
         }
 
-        if (!value) {
-            missingFieldsError();
+        let likes;
+
+        if (like) {
+            likes = await insertLikeModel(videoId, req.user.id);
         }
 
-        const votesAvg = await insertVoteModel(value, videoId, req.user.id);
+        let dislikes;
+
+        if (dislike) {
+            dislikes = await insertDisLikeModel(videoId, req.user.id);
+        }
 
         res.status(201).send({
             status: 'ok',
             data: {
-                entry: {
-                    votes: votesAvg,
+                video: {
+                    likes: likes,
+                    dislikes: dislikes,
                 },
             },
         });

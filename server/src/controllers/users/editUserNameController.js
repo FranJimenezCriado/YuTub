@@ -6,11 +6,13 @@ import editUserNameSchema from '../../schemas/users/editUserNameSchema.js';
 
 const editUserNameController = async (req, res, next) => {
     try {
-        const { newUsername, email } = req.body;
+        const { newUsername } = req.body;
+
+        const userId = req.user.id;
 
         await validateSchemaUtil(editUserNameSchema, req.body);
 
-        await updateUserNameModel(newUsername, email);
+        await updateUserNameModel(newUsername, userId);
 
         res.send({
             status: 'ok',

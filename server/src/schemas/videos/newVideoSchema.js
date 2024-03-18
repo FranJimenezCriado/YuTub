@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import videoSchema from '../videoSchema.js';
+import videoSchema from './videoSchema.js';
 
 import joiErrorMessages from '../joiErrorMessages.js';
 
