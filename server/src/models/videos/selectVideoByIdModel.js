@@ -10,6 +10,7 @@ const selectVideoByIdModel = async (videoId) => {
             SELECT 
                 v.id,
                 v.title,
+                v.category,
                 v.description,
                 v.file,
                 v.userId,
@@ -20,6 +21,7 @@ const selectVideoByIdModel = async (videoId) => {
             FROM videos v
             INNER JOIN users u ON u.id = v.userId
             LEFT JOIN videolikes vo ON vo.videoId = v.id
+            LEFT JOIN videoComments vc ON vc.videoId = v.id
             WHERE v.id = ?
         `,
         [videoId],
