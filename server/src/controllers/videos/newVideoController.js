@@ -17,7 +17,7 @@ const newVideoController = async (req, res, next) => {
             Object.assign(req.body, req.files),
         );
 
-        const { title, description } = req.body;
+        const { title, category, description } = req.body;
 
         const file = req.files.file;
 
@@ -52,6 +52,7 @@ const newVideoController = async (req, res, next) => {
         const videoId = await insertVideoModel(
             id,
             title,
+            category,
             description,
             file.name,
             req.user.id,
@@ -66,6 +67,7 @@ const newVideoController = async (req, res, next) => {
                     video: {
                         id: videoId,
                         title,
+                        category,
                         description,
                         videoName,
                         userId: req.user.id,

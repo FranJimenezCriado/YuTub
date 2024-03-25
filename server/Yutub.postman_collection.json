@@ -344,6 +344,11 @@
 									"type": "text"
 								},
 								{
+									"key": "category",
+									"value": "",
+									"type": "text"
+								},
+								{
 									"key": "description",
 									"value": "",
 									"type": "text"
@@ -375,7 +380,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/videos",
+							"raw": "http://localhost:8000/videos?keyword=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -383,6 +388,12 @@
 							"port": "8000",
 							"path": [
 								"videos"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -519,6 +530,48 @@
 								"videos",
 								":videoId",
 								"edit"
+							],
+							"variable": [
+								{
+									"key": "videoId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_1}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/videos/:videoId/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"videos",
+								":videoId",
+								"comment"
 							],
 							"variable": [
 								{
