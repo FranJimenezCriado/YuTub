@@ -21,16 +21,16 @@ const SearchForm = ({ setSearchParams, loading }) => {
     return (
         <form onSubmit={handleSubmit} className='search-form'>
             <div>
-                <label htmlFor='keyword'>Buscar:</label>
                 <input
-                    type='text'
+                    type='search'
                     id='keyword'
+                    placeholder='Search'
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                 />
             </div>
 
-            <button disabled={loading}>Buscar</button>
+            <button disabled={loading}>Search</button>
         </form>
     );
 };

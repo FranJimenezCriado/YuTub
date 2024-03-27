@@ -15,12 +15,9 @@ const HomePage = () => {
 
     return (
         <main>
-            <h2>Entradas del diario</h2>
-
             <SearchForm setSearchParams={setSearchParams} loading={loading} />
 
             <ul className='video-list'>
-                {/* Si el array de entradas está vacío y loading es true... */}
                 {videos.length < 1 && loading ? (
                     <Loading />
                 ) : videos.length === 0 ? (
