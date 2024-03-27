@@ -18,23 +18,11 @@ export const savePhoto = async (file, width) => {
             });
         }
 
-        try {
-            uploadsDir = path.join(process.cwd(), UPLOADS_DIR, 'images');
-
-            await fs.access(uploadsDir);
-        } catch {
-            fs.mkdir(uploadsDir, function () {
-                console.log(`Directory ${uploadsDir} created`);
-            });
-        }
-
         const sharpImg = sharp(file.data);
 
         sharpImg.resize(width);
 
         const imgName = `${crypto.randomUUID()}.png`;
-
-        uploadsDir = path.join(process.cwd(), UPLOADS_DIR, 'images');
 
         const imgPath = path.join(uploadsDir, imgName);
 
@@ -49,12 +37,7 @@ export const savePhoto = async (file, width) => {
 
 export const deletePhoto = async (imgName) => {
     try {
-        const imgPath = path.join(
-            process.cwd(),
-            UPLOADS_DIR,
-            'images',
-            imgName,
-        );
+        const imgPath = path.join(process.cwd(), UPLOADS_DIR, imgName);
 
         try {
             await fs.access(imgPath);

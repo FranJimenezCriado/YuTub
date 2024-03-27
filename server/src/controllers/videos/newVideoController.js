@@ -31,16 +31,6 @@ const newVideoController = async (req, res, next) => {
             });
         }
 
-        try {
-            uploadsDir = path.join(process.cwd(), UPLOADS_DIR, 'videos');
-
-            await fs.access(uploadsDir);
-        } catch {
-            fs.mkdir(uploadsDir, function () {
-                console.log(`Directory ${uploadsDir} created`);
-            });
-        }
-
         const fileExt = path.extname(file.name);
 
         file.name = `${crypto.randomUUID()}${fileExt}`;
@@ -58,7 +48,7 @@ const newVideoController = async (req, res, next) => {
             req.user.id,
         );
 
-        uploadsDir = path.join(process.cwd(), UPLOADS_DIR, 'videos', videoName);
+        uploadsDir = path.join(process.cwd(), UPLOADS_DIR, videoName);
 
         file.mv(uploadsDir, function () {
             res.status(201).send({
