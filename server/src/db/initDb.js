@@ -32,6 +32,7 @@ const createTables = async () => {
             CREATE TABLE IF NOT EXISTS videos (
                 id VARCHAR(100) PRIMARY KEY,
                 title VARCHAR(50) NOT NULL,
+                miniature VARCHAR(100) NOT NULL,
                 category VARCHAR(25) NOT NULL,
                 description TEXT NOT NULL,
                 file VARCHAR(100) NOT NULL,
@@ -56,16 +57,16 @@ const createTables = async () => {
         `);
 
         await pool.query(`
-        CREATE TABLE IF NOT EXISTS videocomments (
-            id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-            comment VARCHAR(250) NOT NULL,
-            userId VARCHAR(100) NOT NULL,
-            videoId VARCHAR(100) NOT NULL,
-            createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (userId) REFERENCES users(id),
-            FOREIGN KEY (videoId) REFERENCES videos(id)
-        )
-    `);
+            CREATE TABLE IF NOT EXISTS videocomments (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                comment VARCHAR(250) NOT NULL,
+                userId VARCHAR(100) NOT NULL,
+                videoId VARCHAR(100) NOT NULL,
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (userId) REFERENCES users(id),
+                FOREIGN KEY (videoId) REFERENCES videos(id)
+            )
+        `);
 
         console.log('Tables created!');
 

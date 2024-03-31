@@ -12,7 +12,7 @@ const videoSchema = joi
             .messages(joiErrorMessages),
         size: joi
             .number()
-            .max(50000000000)
+            .max(5000000000)
             .required()
             .messages(joiErrorMessages),
     })
