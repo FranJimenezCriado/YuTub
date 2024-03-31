@@ -5,6 +5,7 @@ import deleteVideoController from './deleteVideoController.js';
 import voteVideoController from './voteVideoController.js';
 import editVideoController from './editVideoController.js';
 import commentVideoController from './commentVideoController.js';
+import deleteCommentVideoController from './deleteCommentVideoController.js';
 
 export {
     newVideoController,
@@ -14,4 +15,5 @@ export {
     voteVideoController,
     editVideoController,
     commentVideoController,
+    deleteCommentVideoController,
 };

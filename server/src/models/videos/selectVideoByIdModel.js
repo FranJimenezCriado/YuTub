@@ -10,6 +10,7 @@ const selectVideoByIdModel = async (videoId) => {
             SELECT 
                 v.id,
                 v.title,
+                v.miniature,
                 v.category,
                 v.description,
                 v.file,

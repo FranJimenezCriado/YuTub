@@ -9,6 +9,7 @@ const selectVideosModel = async (keyword = '', userId = '') => {
             SELECT 
                 v.id,
                 v.title,
+                v.miniature,
                 v.category,
                 v.description,
                 v.file,

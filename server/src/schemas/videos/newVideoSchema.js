@@ -2,6 +2,8 @@ import joi from 'joi';
 
 import videoSchema from './videoSchema.js';
 
+import imgSchema from '../imgSchema.js';
+
 import joiErrorMessages from '../joiErrorMessages.js';
 
 const newVideoSchema = joi.object({
@@ -14,6 +16,7 @@ const newVideoSchema = joi.object({
         .required()
         .messages(joiErrorMessages),
     file: videoSchema.required(),
+    miniature: imgSchema.required(),
 });
 
 export default newVideoSchema;

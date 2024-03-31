@@ -16,6 +16,7 @@ import {
     voteVideoController,
     editVideoController,
     commentVideoController,
+    deleteCommentVideoController,
 } from '../controllers/videos/index.js';
 
 const router = express.Router();
@@ -67,6 +68,14 @@ router.delete(
     videoExistsController,
     canEditController,
     deleteVideoController,
+);
+
+router.delete(
+    '/videos/:videoId/:commentId',
+    authUserController,
+    videoExistsController,
+    canEditController,
+    deleteCommentVideoController,
 );
 
 export default router;

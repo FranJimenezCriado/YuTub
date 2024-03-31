@@ -3,6 +3,7 @@ import getPool from '../../db/getPool.js';
 const insertVideoModel = async (
     id,
     title,
+    miniatureName,
     category,
     description,
     file,
@@ -11,8 +12,8 @@ const insertVideoModel = async (
     const pool = await getPool();
 
     await pool.query(
-        `INSERT INTO videos (id, title, category, description, file, userId) VALUES (?, ?, ?, ?, ?, ?)`,
-        [id, title, category, description, file, userId],
+        `INSERT INTO videos (id, title, miniature, category, description, file, userId) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [id, title, miniatureName, category, description, file, userId],
     );
 
     return id;
