@@ -1,0 +1,30 @@
+form.search-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+form.search-form > div > input {
+    padding: 1rem;
+    font-size: inherit;
+    border: 1px solid grey;
+    border-radius: 15px 0px 0px 15px;
+    width: 25vw;
+}
+
+form.search-form > div > input,
+form.search-form > button {
+    margin: 0;
+    height: 35px;
+}
+
+form.search-form > button {
+    border: 1px solid grey;
+    border-radius: 0px 15px 15px 0px;
+}
+
+form.search-form > button > img {
+    width: 25px;
+}

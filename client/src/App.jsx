@@ -3,6 +3,8 @@ import './App.css'
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 
+import Header from './components/Header/Header';
+
 import HomePage from "./pages/HomePage/HomePage"
 import LoginPage from './pages/LoginPage/LoginPage';
 
@@ -10,6 +12,8 @@ function App() {
 
   return (
     <>
+      <Header />
+
       <Toaster
         position='top-center'
         toastOptions={{
@@ -23,8 +27,8 @@ function App() {
         {/* <Route path='/users/validate/:registrationCode' element={<ValidateUserPage />} /> */}
         <Route path='/login' element={<LoginPage />} />
         {/* <Route path='/profile' element={<UserProfilePage />} /> */}
-        {/* <Route path='/entries/:entryId' element={<EntryDetailsPage />} /> */}
-        {/* <Route path='/entries' element={<NewEntryPage />} /> */}
+        {/* <Route path='/videos/:videoId' element={<EntryDetailsPage />} /> */}
+        {/* <Route path='/upload' element={<NewEntryPage />} /> */}
         {/* <Route path='*' element={<NotFoundPage />} /> */}
       </Routes>
     </>

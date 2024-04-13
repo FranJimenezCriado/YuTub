@@ -1,0 +1,27 @@
+div#root > header {
+    display: flex;
+    align-items: center;
+}
+
+div#root > header > div.logo > a > img {
+    width: 100px;
+    margin-top: 0.3rem;
+}
+
+div#root > header > .search-form {
+    display: flex;
+    margin-left: 26rem;
+    margin-right: 18rem;
+    margin-top: 0.7rem;
+}
+
+div#root > header > nav > div.user-data {
+    display: flex;
+    gap: 0.5rem;
+}
+
+div#root > header > nav > div.user-data > img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}

@@ -2,7 +2,7 @@ import PropType from 'prop-types';
 
 import { useState } from 'react';
 
-//import './SearchForm.css';
+import './SearchForm.css';
 
 const SearchForm = ({ setSearchParams, loading }) => {
     const [keyword, setKeyword] = useState('');
@@ -30,7 +30,9 @@ const SearchForm = ({ setSearchParams, loading }) => {
                 />
             </div>
 
-            <button disabled={loading}>Search</button>
+            <button disabled={loading}>
+                <img src='/lupa.png' alt='Search image'/>
+            </button>
         </form>
     );
 };
