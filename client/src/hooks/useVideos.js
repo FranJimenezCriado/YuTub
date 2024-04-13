@@ -10,13 +10,11 @@ const useEntries = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        setLoading(true);
-
         const { videos } = await selectAllVideosService(searchParams);
 
         setVideos(videos);
