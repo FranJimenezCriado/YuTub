@@ -2,6 +2,11 @@ import PropType from 'prop-types';
 
 import { useState } from 'react';
 
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
+
+import './LoginForm.css';
+
 const LoginForm = ({ authLogin, authLoading }) => {
 
     const [email, setEmail] = useState('');
@@ -14,29 +19,46 @@ const LoginForm = ({ authLogin, authLoading }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor='email'>Email:</label>
-            <input
-                type='email'
-                id='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete='email'
-                required
-            />
+        <div className='wrapper'>
+            <form onSubmit={handleSubmit} className='form'>
+                <h1>Login</h1>
 
-            <label htmlFor='pass'>Contraseña:</label>
-            <input
-                type='password'
-                id='pass'
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
-                autoComplete='new-password'
-                required
-            />
+                <div className='input-box'>
+                    <input
+                        type='email'
+                        placeholder='Email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoComplete='email'
+                        required
+                    />
+                    <PersonIcon className='icon'/>
+                </div>
 
-            <button disabled={authLoading}>Loguearse</button>
-        </form>
+                <div className='input-box'>
+                    <input
+                        type='password'
+                        placeholder='Password'
+                        value={pass}
+                        onChange={(e) => setPass(e.target.value)}
+                        autoComplete='new-password'
+                        required
+                    />
+                    <LockIcon className='icon'/>
+                </div>
+
+                <div className='remember-forgot'>
+                    <label><input type="checkbox" />Remember me</label>
+                    <a href="/users/password/recover">Forgot password?</a>
+                </div>
+
+                <button disabled={authLoading}>Login</button>
+
+                <div className='register-link'>
+                    <p>Dont have an account? <a href="/register">Register</a></p>
+                </div>
+            </form>
+        </div>
     );
 };
 

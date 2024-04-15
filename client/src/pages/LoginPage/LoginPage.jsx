@@ -15,8 +15,6 @@ const LoginPage = () => {
 
     return (
         <main>
-            <h2>Login</h2>
-
             <LoginForm authLogin={authLogin} authLoading={authLoading} />
         </main>
     );

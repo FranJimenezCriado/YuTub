@@ -26,6 +26,7 @@ function App() {
         {/* <Route path='/register' element={<RegisterPage />} /> */}
         {/* <Route path='/users/validate/:registrationCode' element={<ValidateUserPage />} /> */}
         <Route path='/login' element={<LoginPage />} />
+        {/* <Route path='/users/password/recover' element={<RecoverPasswordPage />} /> */}
         {/* <Route path='/profile' element={<UserProfilePage />} /> */}
         {/* <Route path='/videos/:videoId' element={<EntryDetailsPage />} /> */}
         {/* <Route path='/upload' element={<NewEntryPage />} /> */}

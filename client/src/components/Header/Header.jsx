@@ -16,6 +16,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import AnchorTemporaryDrawer from "./Drawer/Drawer.jsx"
 
+import userLogo from "../../../public/user.png"
+
 import './Header.css';
 
 const Header = () => {
@@ -45,14 +47,14 @@ const Header = () => {
                             <Button variant="outlined" href="/register">
                                 <img width={30}
                                     alt='avatar sign'
-                                    src='./user.png' 
+                                    src={userLogo} 
                                 />
                                 Register
                             </Button>
                             <Button variant="outlined" href="/login">
                                 <img width={30}
                                     alt='avatar sign'
-                                    src='./user.png' 
+                                    src={userLogo}  
                                 />
                                 Login
                             </Button>
@@ -74,14 +76,14 @@ const Header = () => {
                             <Button variant="outlined" href="/profile">
                                 <img width={30}
                                     alt='avatar sign'
-                                    src='./user.png' 
+                                    src={userLogo} 
                                 />
                                 Profile
                             </Button>
                             <Button onClick={authLogout} variant="outlined">
                                 <img width={30}
                                     alt='avatar sign'
-                                    src='./user.png' 
+                                    src={userLogo}
                                 />
                                 Logout
                             </Button>
