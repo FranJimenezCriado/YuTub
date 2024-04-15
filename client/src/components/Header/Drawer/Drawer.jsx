@@ -15,6 +15,8 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 
 import drawer from '/menu-icon.svg'
 
+import { Link } from 'react-router-dom';
+
 export default function AnchorTemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
@@ -28,6 +30,14 @@ export default function AnchorTemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
+  const home = <Link to='/' style={{ textDecoration: "none", color: "black" }}>Home</Link>
+
+  const subs = <Link to='/mysubs' style={{ textDecoration: "none", color: "black" }}>Subscriptions</Link>
+
+  const channel = <Link to='/mychannel' style={{ textDecoration: "none", color: "black" }}>My channel</Link>
+
+  const videos = <Link to='/myvideos' style={{ textDecoration: "none", color: "black" }}>My videos</Link>
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -36,7 +46,7 @@ export default function AnchorTemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Subscriptions'].map((text, index) => (
+        {[home, subs].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -49,7 +59,7 @@ export default function AnchorTemporaryDrawer() {
       </List>
       <Divider />
       <List>
-        {['My channel', 'My videos'].map((text, index) => (
+        {[channel, videos].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
