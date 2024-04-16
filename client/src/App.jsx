@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 
 import HomePage from "./pages/HomePage/HomePage"
 import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage />} />
-        {/* <Route path='/register' element={<RegisterPage />} /> */}
+        <Route path='/register' element={<RegisterPage />} />
         {/* <Route path='/users/validate/:registrationCode' element={<ValidateUserPage />} /> */}
         <Route path='/login' element={<LoginPage />} />
         {/* <Route path='/users/password/recover' element={<RecoverPasswordPage />} /> */}
