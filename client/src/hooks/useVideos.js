@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { selectAllVideosService } from '../services/videoService';
 
-const useEntries = () => {
+const useVideos = () => {
   const [videos, setVideos] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,4 +35,4 @@ const useEntries = () => {
   };
 };
 
-export default useEntries;
+export default useVideos;
