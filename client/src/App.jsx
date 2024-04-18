@@ -2,6 +2,7 @@ import './App.css'
 
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
 import Header from './components/Header/Header';
 
@@ -11,10 +12,11 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import ValidateUserPage from './pages/ValidateUserPage/ValidateUserPage';
 
 function App() {
+  const [videosFiltrados, setVideosFiltrados] = useState([])
 
   return (
     <>
-      <Header />
+      <Header setViajesFiltrados={setVideosFiltrados}  />
 
       <Toaster
         position='top-center'
@@ -24,14 +26,14 @@ function App() {
       />
 
       <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<HomePage videosFiltrados={videosFiltrados} />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/users/validate/:registrationCode' element={<ValidateUserPage />} />
         <Route path='/login' element={<LoginPage />} />
         {/* <Route path='/users/password/recover' element={<RecoverPasswordPage />} /> */}
         {/* <Route path='/profile' element={<UserProfilePage />} /> */}
         {/* <Route path='/videos/:videoId' element={<EntryDetailsPage />} /> */}
-        {/* <Route path='/upload' element={<NewEntryPage />} /> */}
+        {/* <Route path='/upload' element={<NewEntryPage />} /> */}        
         {/* <Route path='*' element={<NotFoundPage />} /> */}
       </Routes>
     </>
