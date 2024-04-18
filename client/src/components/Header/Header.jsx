@@ -20,7 +20,7 @@ import userLogo from "../../../public/user.png"
 
 import './Header.css';
 
-const Header = () => {
+const Header = ({setVideosFiltrados}) => {
     const { authUser, authLogout } = useContext(AuthContext);
 
     const {
@@ -37,7 +37,7 @@ const Header = () => {
                 </Link>
             </div>
 
-            <SearchForm setSearchParams={setSearchParams} loading={loading} />
+            <SearchForm setVideosFiltrados={setVideosFiltrados} setSearchParams={setSearchParams} loading={loading} />
 
             <nav>
                 <div className='user-data'>
